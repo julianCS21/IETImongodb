@@ -1,9 +1,13 @@
 package eci.ieti.mongodb.service.User;
 
 
+import eci.ieti.mongodb.repository.user.User;
 import eci.ieti.mongodb.repository.user.UserMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceMongoDb implements UserService {
@@ -18,4 +22,40 @@ public class UserServiceMongoDb implements UserService {
     }
 
 
+    @Override
+    public User save(User user) {
+
+        Optional<User> productO = findById(user.getId());
+        if(productO.isEmpty()){
+            this.userMongoRepository.save(user);
+        }
+        return user;
+    }
+
+    @Override
+    public Optional<User> findById(String id) {
+        return this.userMongoRepository.findById(id);
+    }
+
+    @Override
+    public List<User> all() {
+        return this.userMongoRepository.findAll();
+    }
+
+    @Override
+    public void deleteById(String id) {
+        this.userMongoRepository.deleteById(id);
+
+    }
+
+    @Override
+    public User update(User user, String userId) {
+        Optional<User> userToSearch = findById(userId);
+        if(userToSearch.isPresent()){
+            userToSearch.get().update(user.getUsername(),user.getPassword());
+        }
+        save(userToSearch.get());
+        return userToSearch.get();
+
+    }
 }

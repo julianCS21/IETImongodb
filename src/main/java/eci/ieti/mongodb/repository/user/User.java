@@ -53,4 +53,10 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void update(String username, String password){
+        this.setUsername(username);
+        this.setPassword(password);
+
+    }
 }
