@@ -1,6 +1,6 @@
 package eci.ieti.mongodb.service.User;
 
-import eci.ieti.mongodb.repository.user.User;
+import eci.ieti.mongodb.repository.User.User;
 
 import java.util.List;
 import java.util.Optional;

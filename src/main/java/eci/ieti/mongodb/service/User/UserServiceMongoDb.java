@@ -1,8 +1,8 @@
 package eci.ieti.mongodb.service.User;
 
 
-import eci.ieti.mongodb.repository.user.User;
-import eci.ieti.mongodb.repository.user.UserMongoRepository;
+import eci.ieti.mongodb.repository.User.User;
+import eci.ieti.mongodb.repository.User.UserMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +52,8 @@ public class UserServiceMongoDb implements UserService {
     public User update(User user, String userId) {
         Optional<User> userToSearch = findById(userId);
         if(userToSearch.isPresent()){
-            userToSearch.get().update(user.getUsername(),user.getPassword());
+            userToSearch.get().setUsername(user.getUsername());
+            userToSearch.get().setPassword(user.getPassword());
         }
         save(userToSearch.get());
         return userToSearch.get();

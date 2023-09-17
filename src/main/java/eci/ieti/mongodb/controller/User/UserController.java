@@ -1,7 +1,7 @@
 package eci.ieti.mongodb.controller.User;
 
 
-import eci.ieti.mongodb.repository.user.User;
+import eci.ieti.mongodb.repository.User.User;
 import eci.ieti.mongodb.service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +39,7 @@ public class UserController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@RequestParam String id){
+    public ResponseEntity<Void> deleteUser(@PathVariable String id){
         userService.deleteById(id);
         return ResponseEntity.ok().build();
 
